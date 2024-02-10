@@ -9,8 +9,7 @@ import seaborn as sns
 # Only needed for access to command line arguments
 import sys
 import pandas as pd
-from ui_1 import Ui_mainWindow
-
+from UI import Ui_mainWindow
 
 class MyMainWindow(QMainWindow, Ui_mainWindow):
     def __init__(self):
@@ -288,7 +287,6 @@ class MyMainWindow(QMainWindow, Ui_mainWindow):
 
         self.report_df = pd.concat([self.report_df, row])
 
-
     def save_files(self):
 
         folder_path = QFileDialog.getExistingDirectory(self, 'Select Folder', '.')
@@ -373,7 +371,6 @@ class MyMainWindow(QMainWindow, Ui_mainWindow):
         print('good so far')
         plt.savefig('{}/{} Distribution.png'.format(path, column_name))
         print('good so far')
-
 
     def save_barplot(self,parameter_name, top_10_df, path):
 
