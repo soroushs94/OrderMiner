@@ -96,4 +96,3 @@ dics = [access_security, concept_taxonomy, issue_taxonomy, others, quality_contr
 keys = [x for dic in dics for x in dic.keys()]
 words = [y for dic in dics for i,j in dic.items() for y in j]
 
-print(len(keys),len(words))

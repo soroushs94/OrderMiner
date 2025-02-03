@@ -1,5 +1,5 @@
 import pandas as pd
-import Taxonomy as tx
+from .Taxonomy import dics
 
 
 class WO_Categorizer():
@@ -7,7 +7,7 @@ class WO_Categorizer():
         # df = pd.read_csv('./2yrWO_cleaned_2_buildings.csv')
         self.df = df #assuming the df is in correct format
         self.column = cleaned_column
-        self.dics = tx.dics
+        self.dics = dics
         self.keys = dict(zip([y for x in self.dics for y in x], [set(x[y]) for x in self.dics for y in x]))
 
         self.add_columns()

@@ -1,15 +1,14 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+
 from PyQt5.QtGui import *
-from work_order_categorizer import WO_Categorizer
-import Taxonomy as tx
+import src.modules.Taxonomy as tx
+from src.modules.work_order_categorizer import WO_Categorizer
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# Only needed for access to command line arguments
 import sys
 import pandas as pd
-from UI import Ui_mainWindow
+from .UI import Ui_mainWindow
+
 
 class MyMainWindow(QMainWindow, Ui_mainWindow):
     def __init__(self):
@@ -287,6 +286,7 @@ class MyMainWindow(QMainWindow, Ui_mainWindow):
 
         self.report_df = pd.concat([self.report_df, row])
 
+
     def save_files(self):
 
         folder_path = QFileDialog.getExistingDirectory(self, 'Select Folder', '.')
@@ -355,22 +355,18 @@ class MyMainWindow(QMainWindow, Ui_mainWindow):
         plt.figure(figsize=(10, 6))
         sns.set_style("whitegrid")
         ax = sns.barplot(x=column_name, y=df.index, data=df, palette='viridis')
-        print('good so far')
         plt.xlabel(column_name)
         plt.ylabel('Values')
         plt.title('Summary Statistics for {}'.format(column_name))
         plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
-        print('good so far')
         # Add numerical values completely outside the bars to the right
         for p in ax.patches:
             width = p.get_width()
             plt.text(width * 1.01, p.get_y() + p.get_height() / 2, '{:.2f}'.format(width), ha='left', va='center')
-        print('good so far')
         # Set the x-axis limit to accommodate the numbers
         plt.xlim(0, df[column_name].max() * 1.1)
-        print('good so far')
         plt.savefig('{}/{} Distribution.png'.format(path, column_name))
-        print('good so far')
+
 
     def save_barplot(self,parameter_name, top_10_df, path):
 
